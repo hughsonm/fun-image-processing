@@ -29,6 +29,8 @@ jobs:
       - name: Run a multi-line script
         run: |
           sudo apt -yq update
+          sudo apt -yq upgrade
+          apt info octave
           sudo apt install -yq --no-install-recommends octave
           sudo apt install -yq liboctave-dev
           cd Examples/KMeansSegment
