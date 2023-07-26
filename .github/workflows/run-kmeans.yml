@@ -34,5 +34,8 @@ jobs:
           sudo apt install -yq --no-install-recommends octave
           sudo apt install -yq liboctave-dev
           cd Examples/KMeansSegment
-          octave octave_pkg_setup.m
           octave Test.m
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ClusteredMonkey
+          path: Examples/KMeansSegment/MonkeyFace-*
