@@ -19,6 +19,9 @@ if exist('OCTAVE_VERSION', 'builtin')
         pkg('install', '-forge', 'image');
     end
     pkg('load', 'image');
+    gui_active = isguirunning;
+else
+    gui_active = !all(get(0, 'ScreenSize') = [1, 1, 1, 1])
 end
 
 % Image Credit:
@@ -28,8 +31,10 @@ I = imread("MonkeyFace.jpg");
 R = imresize(I,IMAGE_SCALE);
 K = KMeansSegment(R,NUM_SEGMENTS);
 
-ff = figure("Name",sprintf("K-Means with %d segments, scaled %.3fx", NUM_SEGMENTS, IMAGE_SCALE));
-imshow(K);
+if gui_active
+    ff = figure("Name",sprintf("K-Means with %d segments, scaled %.3fx", NUM_SEGMENTS, IMAGE_SCALE));
+    imshow(K);
+end
 
 output_name = sprintf("MonkeyFace-%d-%.3f.png", NUM_SEGMENTS, IMAGE_SCALE);
 imwrite(K, output_name);
